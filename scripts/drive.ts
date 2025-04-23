@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { google } from 'googleapis';
 import { insertImageLinkToSheet, insertLinkToSheet } from './sheets';
 
-//process.env.NODE_OPTIONS = '--openssl-legacy-provider';
+process.env.NODE_OPTIONS = '--openssl-legacy-provider';
 
 dotenv.config();
 
