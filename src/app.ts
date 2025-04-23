@@ -68,9 +68,9 @@ const main = async () => {
     ])
 
     const adapterProvider = createProvider(Provider, {
-        jwtToken: process.env.jwtToken,
-        numberId: process.env.numberId,
-        verifyToken: process.env.verifyToken,
+        jwtToken: '',
+        numberId: '',
+        verifyToken: '',
         version: 'v22.0'
     })
     const adapterDB = new Database()
