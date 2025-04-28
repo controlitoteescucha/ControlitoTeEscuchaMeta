@@ -98,6 +98,8 @@ export const arregloNumeros = [
     { conjunto: "Torres de San Juan", nombre: "JUAN ALBERTO MONTAÑEZ", numero: "573222957838", rol: "TODERO" },
     { conjunto: "Torres de San Juan", nombre: "ELENA MARIA BABATIVA GOMEZ", numero: "573219791545", rol: "ServiciosGenerales" },
     { conjunto: "Torres de San Juan", nombre: "ROCIO", numero: "573144603942", rol: "ADMINISTRADOR" },
+    { nombre: "FRANK ROJAS CRUZ", numero: "573192578670", rol: "SUPERVISOR" },
+    { nombre: "JAIVERTH MATÍAS", numero: "573187140247", rol: "SUPERVISOR" },
 ];
 
 const currentDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));
