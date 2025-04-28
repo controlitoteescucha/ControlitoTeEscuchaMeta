@@ -51,7 +51,6 @@ export const conjuntos = [
 ];
 
 export const arregloNumeros = [
-    { conjunto: "Alborada", nombre: "Gabriel Malpica Cruz", numero: "573204823533", rol: "Administrador" },
     { conjunto: "Alborada", nombre: "JOHAN SANTIAGO CARACAS BASTIDAS", numero: "573219230538", rol: "TODERO" },
     { conjunto: "Alborada", nombre: "MIGUEL ANGEL LOPEZ MAHECHA", numero: "573242535592", rol: "SALVAVIDAS" },
     { conjunto: "Alborada", nombre: "BRAYAN ANDRES GIRATA QUIROGA", numero: "573224358921", rol: "TODERO" },
@@ -98,8 +97,9 @@ export const arregloNumeros = [
     { conjunto: "Torres de San Juan", nombre: "JUAN ALBERTO MONTAÑEZ", numero: "573222957838", rol: "TODERO" },
     { conjunto: "Torres de San Juan", nombre: "ELENA MARIA BABATIVA GOMEZ", numero: "573219791545", rol: "ServiciosGenerales" },
     { conjunto: "Torres de San Juan", nombre: "ROCIO", numero: "573144603942", rol: "ADMINISTRADOR" },
-    { nombre: "FRANK ROJAS CRUZ", numero: "573192578670", rol: "SUPERVISOR" },
-    { nombre: "JAIVERTH MATÍAS", numero: "573187140247", rol: "SUPERVISOR" },
+    { nombre: "FRANK ROJAS CRUZ", numero: "573192578670", rol: "Supervisor" },
+    { nombre: "JAIVERTH MATÍAS", numero: "573187140247", rol: "Supervisor" },
+    { conjunto: "Alborada", nombre: "Gabriel Malpica Cruz", numero: "573204823533", rol: "Supervisor" },
 ];
 
 const currentDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));
