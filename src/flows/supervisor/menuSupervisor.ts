@@ -17,7 +17,7 @@ export const menuSupervisor = addKeyword(EVENTS.ACTION)
     .addAnswer(menuSupervisorOpciones, 
         { capture: true }, 
         async (ctx, ctxFn) => {
-            const opciones = ["1", "2", "3" ];
+            const opciones = ["1", "2", "3", "0" ];
             if (!opciones.includes(ctx.body)) {
                 return ctxFn.fallBack("❌ No elegiste una opción válida, por favor intenta nuevamente.");
             }
