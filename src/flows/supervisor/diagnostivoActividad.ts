@@ -94,6 +94,7 @@ export const diagnosticoActividad = addKeyword('3')
     .addAnswer("✅ *¡Gracias por la información! El registro de la actividad fue exitoso.* 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            console.log(formattedTime)
             try {
                 await appendToSheet([
                     [
