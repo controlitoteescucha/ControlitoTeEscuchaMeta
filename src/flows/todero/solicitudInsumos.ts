@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 import { uploadFileLegacy } from 'scripts/drive';
 
 const spreadsheetId = '1thSgVyj01wDT5aqzpdWAFbGz9VsHIGJW_ZF7mm4VaJk';
@@ -42,10 +42,11 @@ export const flujoPedidoInsumosTodero = addKeyword('5')
     )
     .addAnswer('📝 *Confirmando tu pedido...*\nEn breve recibirás más información. 🚚', null, async (ctx, ctxFn) => {
         const userInfo = ctxFn.state.getMyState();
+        const fecha = getFormattedTime();
         try {
             await appendToSheet([
                 [
-                    formattedTime,
+                    fecha,
                     userInfo.conjunto,
                     ctx.from,
                     userInfo.nombreCompleto,

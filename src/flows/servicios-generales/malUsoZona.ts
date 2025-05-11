@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 import { uploadFileLegacy } from 'scripts/drive';
 
 const spreadsheetId = '1DmTSQcwQOvshWo-_efey0ymflc70i9kO6lfOeWCQR8w';
@@ -67,10 +67,11 @@ export const malUsoZonaComun = addKeyword('3')
     .addAnswer("✅ *¡Gracias por la información! El registro de la falta fue exitoso.* 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             try {
                 await appendToSheet([
                     [
-                        formattedTime,
+                        fecha,
                         userInfo.conjunto,
                         userInfo.torre,
                         userInfo.aptoCasa,

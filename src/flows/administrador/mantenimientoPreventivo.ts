@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot'
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 
 const spreadsheetId = '15_w3R_YefMUBYVlLygygQoO-39cNdj3W7VnX0N2Apf8';
 const driveId = '1rt0xak1pFBaMsoTFG-nhLpbajaVUkSh-'
@@ -61,9 +61,10 @@ export const mantenimientoPreventivoFlow = addKeyword('1')
     .addAnswer("✅ ¡Gracias por la información! Nuestro equipo se pondrá en contacto contigo pronto. Si necesitas más ayuda, no dudes en escribirnos. 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             await appendToSheet([ 
                 [
-                    formattedTime, 
+                    fecha, 
                     userInfo.conjunto, 
                     ctx.from, 
                     userInfo.nombreCompleto, 

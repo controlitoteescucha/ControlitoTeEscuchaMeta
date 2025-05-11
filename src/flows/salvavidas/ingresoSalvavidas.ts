@@ -1,6 +1,6 @@
 import { addKeyword } from '@builderbot/bot'
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 
 const spreadsheetId = '1MaAsMqigyJXIHBFDfM3nMoAtcozBXXwPTHaO4ZbYuNE';
 
@@ -22,10 +22,10 @@ export const ingresoSalvavidas = addKeyword('1')
     .addAnswer("✅ ¡Gracias por la información! Tu ingreso se ha registrado con éxito. 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
-
+            const fecha = getFormattedTime();
             await appendToSheet([ 
                 [
-                    formattedTime, 
+                    fecha, 
                     userInfo.conjunto, 
                     ctx.from, 
                     userInfo.nombreCompleto,

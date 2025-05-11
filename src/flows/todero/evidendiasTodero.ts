@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot'
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 
 const spreadsheetId = '1YWx_MhJ8mSxZiA6RaZv91sX965KMBxtvenN9FdXWdL0';
 const driveId = '1PFuyYI-S1huUX75eMyCLPb9EUZ1Tf2bC';
@@ -62,9 +62,10 @@ export const evidenciasTodero = addKeyword('3')
         null, 
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             await appendToSheet([ 
                 [
-                    formattedTime, 
+                    fecha, 
                     userInfo.conjunto, 
                     ctx.from, 
                     userInfo.nombreCompleto,

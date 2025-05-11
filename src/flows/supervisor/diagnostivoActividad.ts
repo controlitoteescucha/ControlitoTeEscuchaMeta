@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot';
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { conjuntos, definirConjunto, formattedTime, menuConjuntos } from 'scripts/utils';
+import { conjuntos, definirConjunto, getFormattedTime, menuConjuntos } from 'scripts/utils';
 
 const spreadsheetId = '1yPdxjd8eQ3rVrn1PDD026imqOnWld6vO_YcmWHeq1sk';
 const driveId = '1qtvzBCTHGpunYO7ZhlJGQiJp7ERYFV9-';
@@ -94,11 +94,11 @@ export const diagnosticoActividad = addKeyword('3')
     .addAnswer("✅ *¡Gracias por la información! El registro de la actividad fue exitoso.* 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
-            console.log(formattedTime)
+            const fecha = getFormattedTime();
             try {
                 await appendToSheet([
                     [
-                        formattedTime,
+                        fecha,
                         userInfo.conjunto,
                         ctx.from,
                         userInfo.nombreCompleto,

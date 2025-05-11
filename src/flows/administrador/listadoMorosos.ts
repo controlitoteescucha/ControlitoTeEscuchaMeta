@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot'
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 
 const spreadsheetId = '1FUsUMxnrnMfK4DAwIMGpCygmNW8hbcYIN-IIbvLqIrM';
 const driveId = '1Q2OetRkW7NxIulGnUOLnLfC4hWzJd_Qt';
@@ -43,9 +43,10 @@ export const listadoMorososFlow = addKeyword('5')
     .addAnswer("✅ ¡Gracias por la información!", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             await appendToSheet([ 
                 [
-                    formattedTime, 
+                    fecha, 
                     userInfo.conjunto, 
                     ctx.from, 
                     userInfo.nombreCompleto,

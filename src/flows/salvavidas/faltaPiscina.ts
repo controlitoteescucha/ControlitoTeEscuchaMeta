@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot';
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { formattedTime } from 'scripts/utils';
+import { getFormattedTime } from 'scripts/utils';
 
 const spreadsheetId = '1lBoVH9noOjnaHf0v9gZLtCXn_RGNlQoX4tYbf7TSJrc';
 const driveId = '1KyHIl479CxMUSGUR3UEKnlwq29A1agSW';
@@ -66,10 +66,11 @@ export const reporteFaltaPiscina = addKeyword('3')
     .addAnswer("✅ *¡Gracias por la información! El registro de la falta fue exitoso.* 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             try {
                 await appendToSheet([
                     [
-                        formattedTime,
+                        fecha,
                         userInfo.conjunto,
                         userInfo.torre,
                         userInfo.casa,

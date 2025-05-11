@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot'
 import { uploadFileLegacy } from 'scripts/drive';
 import { appendToSheet } from 'scripts/sheets';
-import { conjuntos, definirConjunto, formattedTime, menuConjuntos } from 'scripts/utils';
+import { conjuntos, definirConjunto, getFormattedTime, menuConjuntos } from 'scripts/utils';
 
 const spreadsheetId = '18ImTrxRuJP7hc_-uc2QGHJEzLYqmuFjiNn3gSyezQso';
 const driveId = '1yOum-0TtyZzArce4UNRG5ETM1j-nQ-y4'
@@ -82,9 +82,10 @@ export const danioFlow = addKeyword('1')
     .addAnswer("✅ ¡Gracias por la información! Nuestro equipo se pondrá en contacto contigo pronto. Si necesitas más ayuda, no dudes en escribirnos. 😊", null,
         async (ctx, ctxFn) => {
             const userInfo = ctxFn.state.getMyState();
+            const fecha = getFormattedTime();
             await appendToSheet([ 
                 [
-                    formattedTime, 
+                    fecha, 
                     userInfo.conjunto, 
                     ctx.from, 
                     userInfo.nombreUsuario, 
