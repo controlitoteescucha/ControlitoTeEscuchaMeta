@@ -14,40 +14,38 @@ type CtxFn = {
 export const menuConjuntos = 
 `🏘️ ¿Desde qué conjunto residencial nos estás escribiendo?
 
-1. *Alborada*
-2. *Balcones de Gratamira*
-3. *Buganviles*
-4. *Centauros A*
-5. *Cerrocampestre*
-6. *Emaús*
-7. *Mi Finca en el Llano*
-8. *Montearroyo*
-9. *Nueva Esperanza 2*
-10. *Parques de Castillas*
-11. *Quintas de Morelia*
-12. *Quintas de San Souuci*
-13. *Serramonte 3*
-14. *Torres de Mediterráneo*
-15. *Torres de San Juan*
+1. *Balcones de Gratamira*
+2. *Buganviles*
+3. *Centauros A*
+4. *Emaús*
+5. *Mi Finca en el Llano*
+6. *Montearroyo*
+7. *Nueva Esperanza 2*
+8. *Parques de Castillas*
+9. *Quintas de Morelia*
+10. *Quintas de San Souuci*
+11. *Santamaria 2*
+12. *Senderos 1*
+13. *Torres de Mediterraneo*
+14. *Torres de San Juan*
 
 💬 Responde con el número correspondiente. 😊`;
 
 export const conjuntos = [
-    { '1': 'Alborada' },
-    { '2': 'Balcones de Gratamira' },
-    { '3': 'Buganviles' },
-    { '4': 'Centauros A' },
-    { '5': 'Cerrocampestre' },
-    { '6': 'Emaús' },
-    { '7': 'Mi Finca en el Llano' },
-    { '8': 'Montearroyo' },
-    { '9': 'Nueva Esperanza 2' },
-    { '10': 'Parques de Castillas' },
-    { '11': 'Quintas de Morelia' },
-    { '12': 'Quintas de San Souuci' },
-    { '13': 'Serramonte 3' },
-    { '14': 'Torres de Mediterraneo' },
-    { '15': 'Torres de San Juan' }
+    { '1': 'Balcones de Gratamira' },
+    { '2': 'Buganviles' },
+    { '3': 'Centauros A' },
+    { '4': 'Emaús' },
+    { '5': 'Mi Finca en el Llano' },
+    { '6': 'Montearroyo' },
+    { '7': 'Nueva Esperanza 2' },
+    { '8': 'Parques de Castillas' },
+    { '9': 'Quintas de Morelia' },
+    { '10': 'Quintas de San Souuci' },
+    { '11': 'Santamaria 2' },
+    { '12': 'Senderos 1' },
+    { '13': 'Torres de Mediterraneo' },
+    { '14': 'Torres de San Juan' }
 ];
 
 export const arregloNumeros = [
@@ -55,31 +53,18 @@ export const arregloNumeros = [
     { nombre: "Jaivert Matias", numero: "573187140247", rol: "Supervisor" },
     { nombre: "Mayra Balladales", numero: "573106781958", rol: "Supervisor" },
     { nombre: "Michael Andres Caliman", numero: "573112192786", rol: "Supervisor" },
-    { conjunto: "Cerro campestre", nombre: "Sandra Margoth Moreno", numero: "573213373759", rol: "Administrador" },
-    { conjunto: "Cerro campestre", nombre: "Dani Humberto Bohorquez Avendaño", numero: "573138009791", rol: "Todero" },
-    { conjunto: "Cerro campestre", nombre: "Yurley Dahayana Guevara Beltran", numero: "573143731790", rol: "Todero" },
     { conjunto: "Balcones de gratamira", nombre: "Olga Gutierrez", numero: "573112397741", rol: "Administrador" },
-    { conjunto: "Balcones de gratamira", nombre: "Elkin Dario Torres Calderon", numero: "573214616922", rol: "Operrio todero" },
+    { conjunto: "Balcones de gratamira", nombre: "Elkin Dario Torres Calderon", numero: "573214616922", rol: "Todero" },
     { conjunto: "Quintas de morelia", nombre: "Yenni Rocio Yace Arias", numero: "573202755027", rol: "Administrador" },
     { conjunto: "Quintas de morelia", nombre: "Orlando Asprilla", numero: "573102215009", rol: "Todero" },
     { conjunto: "Quintas de morelia", nombre: "David Sebastian Poblador Ramos", numero: "573044116818", rol: "Todero" },
     { conjunto: "Quintas de morelia", nombre: "Luis Angel Ballesteros Molano", numero: "573208866985", rol: "Salvavidas" },
-    { conjunto: "Serramonte iii", nombre: "Diana Sofia Barrera", numero: "573134588357", rol: "Administrador" },
-    { conjunto: "Serramonte iii", nombre: "Luis Eduardo Bohorquez Avendaño", numero: "573118599288", rol: "Todero" },
-    { conjunto: "Serramonte iii", nombre: "Steban Enrique Alfonso Salazar", numero: "573228910843", rol: "Salvavidas" },
     { conjunto: "Parques de castilla", nombre: "Carmen Eugenia Benito Bermudez", numero: "573046647834", rol: "Administrador" },
     { conjunto: "Parques de castilla", nombre: "Fernando Camargo Bedoya", numero: "573213327155", rol: "Todero" },
     { conjunto: "Buganviles", nombre: "Glacidia Vasquez Quijano", numero: "573203085992", rol: "Administrador" },
     { conjunto: "Buganviles", nombre: "Jhon Ospina", numero: "573227140147", rol: "Todero" },
     { conjunto: "Sansoucci", nombre: "Camilo Vega", numero: "573112298950", rol: "Administrador" },
     { conjunto: "Sansoucci", nombre: "Jhon Ospina", numero: "573227140147", rol: "Todero" },
-    { conjunto: "Alborada", nombre: "Catalina Restrepo", numero: "573506202424", rol: "Administrador" },
-    { conjunto: "Alborada", nombre: "Santiago Alexis Cano Rojas", numero: "573214701869", rol: "Todero" },
-    { conjunto: "Alborada", nombre: "Kelys Villa", numero: "573222365977", rol: "Operaria aseo" },
-    { conjunto: "Alborada", nombre: "Johan Santiago Caracas Bastidas", numero: "573219230538", rol: "ServiciosGenerales" },
-    { conjunto: "Alborada", nombre: "Brayan Andres Girata Quiroga", numero: "573224358921", rol: "Todero" },
-    { conjunto: "Alborada", nombre: "Miguel Angel Mahecha Lopez", numero: "573242535592", rol: "Salvavidas" },
-    { conjunto: "Alborada", nombre: "Brandon Camilo Cano Rojas", numero: "573132902535", rol: "Todero" },
     { conjunto: "Nueva esperanza ii", nombre: "Oscar Miguel Vigoya Rodrigue", numero: "573222518567", rol: "Administrador" },
     { conjunto: "Nueva esperanza ii", nombre: "Edicson Alexander Valeriano Sanchez", numero: "573219619405", rol: "Todero-salvavidas" },
     { conjunto: "Nueva esperanza ii", nombre: "German Rodriguez Babativa Gomez", numero: "573209789304", rol: "Todero" },
@@ -115,7 +100,12 @@ export const arregloNumeros = [
     { conjunto: "Mi finca en el llano", nombre: "Blanca Yanet Castañeda Dueñas", numero: "573166768772", rol: "Operaria aseo" },
     { conjunto: "Mi finca en el llano", nombre: "Erika Edith Lopez Marquez", numero: "573238974631", rol: "Salvavidas" },
     { conjunto: "Mi finca en el llano", nombre: "Yeny Paola Neque", numero: "573102907702", rol: "Salvavidas" },
-    { conjunto: "Mi finca en el llano", nombre: "Jakeline Suarez Bravo", numero: "573102784768", rol: "Salvavidas" }
+    { conjunto: "Mi finca en el llano", nombre: "Jakeline Suarez Bravo", numero: "573102784768", rol: "Salvavidas" },
+    { conjunto: "Santamaria 2", nombre: "Edicson Valeriano", numero: "573219619405", rol: "Todero" },
+    { conjunto: "Santamaria 2", nombre: "Harlem", numero: "573238032305", rol: "Todero" },
+    { conjunto: "Santamaria 2", nombre: "Jennifer", numero: "573203077431", rol: "Operaria aseo" },
+    { conjunto: "Santamaria 2", nombre: "Sebastian Rozo", numero: "573108879485", rol: "Salvavidas" },
+    { conjunto: "Senderos 1", nombre: "David Mahecha", numero: "573024105440", rol: "Todero" },
   ];
 
 export function getFormattedTime() {
