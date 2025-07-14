@@ -49,6 +49,7 @@ export const conjuntos = [
 ];
 
 export const arregloNumeros = [
+    { nombre: "Gabriel", numero: "573196748953", rol: "Todero" },
     { nombre: "Frank Rojas", numero: "573192578670", rol: "Supervisor" },
     { nombre: "Jaivert Matias", numero: "573187140247", rol: "Supervisor" },
     { nombre: "Mayra Balladales", numero: "573106781958", rol: "Supervisor" },
