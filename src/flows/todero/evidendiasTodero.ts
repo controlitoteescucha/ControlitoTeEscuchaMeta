@@ -10,20 +10,6 @@ const spreadsheetId = '1YWx_MhJ8mSxZiA6RaZv91sX965KMBxtvenN9FdXWdL0';
 const driveId = '1PFuyYI-S1huUX75eMyCLPb9EUZ1Tf2bC';
 
 export const evidenciasTodero = addKeyword('3')
-    .addAction(
-        async(ctx, ctxFn) => {
-            const userInfo = ctxFn.state.getMyState();
-            const fecha = getFormattedTime();
-            await appendToSheet([ 
-                [
-                    fecha, 
-                    userInfo.conjunto, 
-                    ctx.from, 
-                    userInfo.nombreCompleto,
-                ]
-            ], spreadsheetId , userInfo.conjunto);
-        }
-    )
     .addAnswer("📸 *¡Necesitamos una foto como evidencia!*\n\nPor favor, envíame una imagen de como estaba antes de realizar la actividad. 😊", 
         { capture: true }, 
         async (ctx, ctxFn) => {
@@ -111,7 +97,7 @@ export const evidenciasTodero = addKeyword('3')
                     currentState.fotoAntes, 
                     `${ctx.from}-${ctx.pushName}-ANTES`, 
                     currentState.conjunto, 
-                    driveId, 
+                    driveId,    
                     spreadsheetId, 
                     currentState.mimeType
                 );
