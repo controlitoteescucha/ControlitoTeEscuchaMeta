@@ -43,31 +43,16 @@ export const evidenciasTodero = addKeyword('3')
 
             try {
                 const localPath = await ctxFn.provider.saveFile(ctx, { path: uploadDir });
-                await ctxFn.state.update({ fotoAntes: localPath });
+                const currentState = ctxFn.state.getMyState(); // Obtener el estado actual
+                await ctxFn.state.update({
+                ...currentState,
+                fotoAntes: localPath
+                });
             } catch (error) {
                 console.error('Error al guardar archivo:', error);
                 return ctxFn.fallBack("❌ Ocurrió un error al procesar tu imagen. Por favor, inténtalo nuevamente.");
             }
 
-            try {
-                const currentState = ctxFn.state.getMyState();
-                await uploadFileLegacy(
-                    currentState.fotoAntes, 
-                    `${ctx.from}-${ctx.pushName}`, 
-                    currentState.conjunto, 
-                    driveId, 
-                    spreadsheetId, 
-                    currentState.mimeType
-                );
-            } catch (error) {
-                console.error('Error al subir archivo (antes):', error);
-                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen 'antes'. Por favor, inténtalo nuevamente.");
-            } finally {
-                const currentState = ctxFn.state.getMyState();
-                if (fs.existsSync(currentState.fotoAntes)) {
-                    fs.unlinkSync(currentState.fotoAntes);
-                }
-            }
     
         }
     )
@@ -90,37 +75,72 @@ export const evidenciasTodero = addKeyword('3')
 
             try {
                 const localPath = await ctxFn.provider.saveFile(ctx, { path: uploadDir });
-                await ctxFn.state.update({ fotoDespues: localPath });
+                const currentState = ctxFn.state.getMyState(); // Obtener el estado actual
+                await ctxFn.state.update({
+                ...currentState,
+                fotoDespues: localPath
+                });
             } catch (error) {
                 console.error('Error al guardar archivo:', error);
                 return ctxFn.fallBack("❌ Ocurrió un error al procesar tu imagen. Por favor, inténtalo nuevamente.");
             }
+    
+        }
+    )
+   .addAnswer("✅ *¡Gracias por tu colaboración!*\n\nEl registro de la actividad ha sido exitoso. 😊\n\n¡Tu trabajo es muy valioso para nosotros! 🌟", 
+    null, 
+    async (ctx, ctxFn) => {
+        const userInfo = ctxFn.state.getMyState();
+        const fecha = getFormattedTime();
 
-            try {
-                const currentState = ctxFn.state.getMyState();
+        await appendToSheet([ 
+            [
+                fecha, 
+                userInfo.conjunto, 
+                ctx.from, 
+                userInfo.nombreCompleto,
+            ]
+        ], spreadsheetId , userInfo.conjunto);
+
+        const currentState = ctxFn.state.getMyState();
+
+        try {
+            // Subir foto ANTES
+            if (currentState.fotoAntes) {
                 await uploadFileLegacy(
-                    currentState.fotoDespues, 
-                    `${ctx.from}-${ctx.pushName}`, 
+                    currentState.fotoAntes, 
+                    `${ctx.from}-${ctx.pushName}-ANTES`, 
                     currentState.conjunto, 
                     driveId, 
                     spreadsheetId, 
                     currentState.mimeType
                 );
-            } catch (error) {
-                console.error('Error al subir archivo (después):', error);
-                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen 'después'. Por favor, inténtalo nuevamente.");
-            } finally {
-                const currentState = ctxFn.state.getMyState();
-                if (fs.existsSync(currentState.fotoDespues)) {
-                    fs.unlinkSync(currentState.fotoDespues);
-                }
             }
-    
+
+            // Subir foto DESPUÉS
+            if (currentState.fotoDespues) {
+                await uploadFileLegacy(
+                    currentState.fotoDespues, 
+                    `${ctx.from}-${ctx.pushName}-DESPUES`, 
+                    currentState.conjunto, 
+                    driveId, 
+                    spreadsheetId, 
+                    currentState.mimeType
+                );
+            }
+        } catch (error) {
+            console.error('Error al subir archivo(s):', error);
+            return ctxFn.fallBack("❌ Ocurrió un error al subir tus evidencias. Por favor, inténtalo nuevamente.");
+        } finally {
+            // Limpieza de archivos temporales
+            if (currentState.fotoAntes && fs.existsSync(currentState.fotoAntes)) {
+                fs.unlinkSync(currentState.fotoAntes);
+            }
+            if (currentState.fotoDespues && fs.existsSync(currentState.fotoDespues)) {
+                fs.unlinkSync(currentState.fotoDespues);
+            }
         }
-    )
-    .addAnswer("✅ *¡Gracias por tu colaboración!*\n\nEl registro de la actividad ha sido exitoso. 😊\n\n¡Tu trabajo es muy valioso para nosotros! 🌟", 
-        null, 
-        async (ctxFn) => {
-            ctxFn.endFlow();
-        }
-    );
+
+        ctxFn.endFlow();
+    }
+);
