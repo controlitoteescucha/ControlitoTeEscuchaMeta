@@ -78,37 +78,41 @@ export const evidenciasTodero = addKeyword('3')
                 ]
             ], spreadsheetId , userInfo.conjunto);
             try {
+                const currentState = ctxFn.state.getMyState();
                 await uploadFileLegacy(
-                    userInfo.fotoAntes, 
+                    currentState.fotoAntes, 
                     `${ctx.from}-${ctx.pushName}`, 
-                    userInfo.conjunto, 
+                    currentState.conjunto, 
                     driveId, 
                     spreadsheetId, 
-                    userInfo.mimeType
+                    currentState.mimeType
                 );
             } catch (error) {
-                console.error('Error al subir archivo:', error);
-                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen. Por favor, inténtalo nuevamente.");
+                console.error('Error al subir archivo (antes):', error);
+                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen 'antes'. Por favor, inténtalo nuevamente.");
             } finally {
-                if (fs.existsSync(userInfo.fotoAntes)) {
-                    fs.unlinkSync(userInfo.fotoAntes);
+                const currentState = ctxFn.state.getMyState();
+                if (fs.existsSync(currentState.fotoAntes)) {
+                    fs.unlinkSync(currentState.fotoAntes);
                 }
             }
             try {
+                const currentState = ctxFn.state.getMyState();
                 await uploadFileLegacy(
-                    userInfo.fotoDespues, 
+                    currentState.fotoDespues, 
                     `${ctx.from}-${ctx.pushName}`, 
-                    userInfo.conjunto, 
+                    currentState.conjunto, 
                     driveId, 
                     spreadsheetId, 
-                    userInfo.mimeType
+                    currentState.mimeType
                 );
             } catch (error) {
-                console.error('Error al subir archivo:', error);
-                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen. Por favor, inténtalo nuevamente.");
+                console.error('Error al subir archivo (después):', error);
+                return ctxFn.fallBack("❌ Ocurrió un error al subir tu imagen 'después'. Por favor, inténtalo nuevamente.");
             } finally {
-                if (fs.existsSync(userInfo.fotoDespues)) {
-                    fs.unlinkSync(userInfo.fotoDespues);
+                const currentState = ctxFn.state.getMyState();
+                if (fs.existsSync(currentState.fotoDespues)) {
+                    fs.unlinkSync(currentState.fotoDespues);
                 }
             }
             ctxFn.endFlow();
