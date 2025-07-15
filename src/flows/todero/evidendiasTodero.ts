@@ -3,8 +3,9 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { addKeyword } from '@builderbot/bot';
 import { appendToSheet } from 'scripts/sheets';
-import { insertImageLinkAt } from 'scripts/sheets'; // NUEVA función personalizada
+import { insertImageLinkAt } from 'scripts/sheets';
 import { getFormattedTime } from 'scripts/utils';
+import { uploadFileToDriveOnly } from 'scripts/drive';
 
 const spreadsheetId = '1YWx_MhJ8mSxZiA6RaZv91sX965KMBxtvenN9FdXWdL0';
 const driveId = '1PFuyYI-S1huUX75eMyCLPb9EUZ1Tf2bC';
