@@ -146,3 +146,57 @@ export async function uploadFileLegacy(
     mimeType
   });
 }
+
+export async function uploadFileToDriveOnly({
+  filePath,
+  fileName,
+  driveId,
+  mimeType
+}: {
+  filePath: string;
+  fileName: string;
+  driveId: string;
+  mimeType: string;
+}): Promise<string> {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`El archivo ${filePath} no existe`);
+  }
+
+  const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      ...credentials,
+      private_key: credentials.private_key.replace(/\\n/g, '\n')
+    },
+    scopes: ['https://www.googleapis.com/auth/drive']
+  });
+
+  const driveService = google.drive({ version: 'v3', auth });
+  const media = {
+    mimeType,
+    body: fs.createReadStream(filePath),
+  };
+
+  const { data: file } = await driveService.files.create({
+    requestBody: {
+      name: fileName,
+      parents: [driveId],
+    },
+    media,
+    fields: 'id'
+  });
+
+  if (!file.id) {
+    throw new Error('No se pudo obtener el ID del archivo subido');
+  }
+
+  await driveService.permissions.create({
+    fileId: file.id,
+    requestBody: {
+      role: 'reader',
+      type: 'anyone',
+    }
+  });
+
+  return `https://drive.google.com/uc?id=${file.id}`;
+}

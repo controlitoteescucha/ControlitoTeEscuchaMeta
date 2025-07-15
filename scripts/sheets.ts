@@ -103,19 +103,28 @@ export async function appendToSheet(
   values: (string | number)[][],
   spreadsheetId: string,
   sheetName: string
-) {
+): Promise<number> {
   try {
     const sheets = await getSheetsClient();
     const range = `${sheetName}!A1`;
-    
+
     const res = await sheets.spreadsheets.values.append({
       spreadsheetId,
       range,
       valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
       requestBody: { values },
     });
-    
-    return res.data;
+
+    const updates = res.data.updates;
+    if (updates?.updatedRange) {
+      const match = updates.updatedRange.match(/![A-Z]+(\d+)/);
+      if (match && match[1]) {
+        return parseInt(match[1], 10); // ⬅️ Aquí se obtiene el número de fila
+      }
+    }
+
+    throw new Error('No se pudo determinar el número de fila insertada');
   } catch (error) {
     console.error(`Error al agregar datos en "${sheetName}":`, {
       error: error instanceof Error ? error.message : error,
@@ -124,6 +133,7 @@ export async function appendToSheet(
     throw error;
   }
 }
+
 
 // Función mejorada para filtrar datos
 export async function getFilteredData(
@@ -252,6 +262,38 @@ export async function insertLinkToSheet(
       spreadsheetId,
       sheetName,
       link
+    });
+    throw error;
+  }
+}
+
+export async function insertImageLinkAt(
+  imageUrl: string,
+  spreadsheetId: string,
+  sheetName: string,
+  rowIndex: number,
+  columnIndex: number
+): Promise<void> {
+  try {
+    const sheets = await getSheetsClient();
+
+    if (!imageUrl || !/^https?:\/\//i.test(imageUrl)) {
+      throw new Error('La URL de la imagen no es válida');
+    }
+
+    const columnLetter = String.fromCharCode(65 + columnIndex); // A = 0, B = 1, ...
+    const range = `${sheetName}!${columnLetter}${rowIndex}`;
+    const formula = `=IMAGE("${imageUrl.replace(/"/g, '""')}")`;
+
+    await writeToSheet([[formula]], range, spreadsheetId);
+  } catch (error) {
+    console.error(`Error en insertImageLinkAt:`, {
+      error: error instanceof Error ? error.message : error,
+      imageUrl,
+      spreadsheetId,
+      sheetName,
+      rowIndex,
+      columnIndex
     });
     throw error;
   }
