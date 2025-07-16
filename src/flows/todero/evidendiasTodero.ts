@@ -57,14 +57,18 @@ export const evidenciasTodero = addKeyword('3')
   )
   .addAnswer('✅ *¡Gracias por tu colaboración!*\n\nEl registro de la actividad ha sido exitoso. 😊\n\n¡Tu trabajo es muy valioso para nosotros! 🌟', null,
     async (ctx, ctxFn) => {
-      const userInfo = ctxFn.state.getMyState();
-      const fecha = getFormattedTime();
-
-      let rowIndex: number;
+        let rowIndex: number;
+        const userInfo = ctxFn.state.getMyState();
+        const fecha = getFormattedTime().toString();
 
       try {
         rowIndex = await appendToSheet([
-          [fecha, userInfo.conjunto, ctx.from, userInfo.nombreCompleto]
+          [
+            fecha, 
+            userInfo.conjunto, 
+            ctx.from, 
+            userInfo.nombreCompleto
+        ]
         ], spreadsheetId, userInfo.conjunto);
       } catch (error) {
         console.error('Error al registrar en hoja:', error);
