@@ -59,7 +59,7 @@ export const evidenciasTodero = addKeyword('3')
     async (ctx, ctxFn) => {
         let rowIndex: number;
         const userInfo = ctxFn.state.getMyState();
-        const fecha = getFormattedTime().toString();
+        const fecha = `'${getFormattedTime()}`;
 
       try {
         rowIndex = await appendToSheet([
